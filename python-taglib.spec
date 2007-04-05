@@ -1,43 +1,50 @@
 Summary:	Python bindings for TagLib
+Summary(pl.UTF-8):	Wiązania Pythona dla biblioteki TagLib
 Name:		python-taglib
 Version:	1.3.3
-Release:	1emh
-URL:		http://namingmuse.berlios.de
-Source0:	http://download.berlios.de/namingmuse/%{name}-%{version}.tar.gz
-# Source0-md5:	744882d6de33d13b9d80a238f3dc16ed
+Release:	1
 License:	GPL
 Group:		Development/Libraries
+Source0:	http://download.berlios.de/namingmuse/%{name}-%{version}.tar.gz
+# Source0-md5:	744882d6de33d13b9d80a238f3dc16ed
+URL:		http://namingmuse.berlios.de/
 BuildRequires:	python-devel
-BuildRequires:	taglib-devel
+BuildRequires:	rpm-pythonprov
 BuildRequires:	swig-python
-Requires:	python
+BuildRequires:	taglib-devel
+%pyrequires_eq	python-libs
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
 Python bindings for TagLib, the audio meta data library for
 mp3/ogg/flac/mpc/ape.
 
+%description -l pl.UTF-8
+Wiązania Pythona dla biblioteki TagLib obsługującej metadane dla
+plików mp3/ogg/flac/mpc/ape.
+
 %prep
 %setup -q
 
 %build
-%configure \
-	 \
+%configure
 
 %{__make}
 
 %install
 rm -rf $RPM_BUILD_ROOT
-[ -n "$RPM_BUILD_ROOT" -a "$RPM_BUILD_ROOT" != "/" ] && rm -rf $RPM_BUILD_ROOT
-%{__make} DESTDIR=$RPM_BUILD_ROOT install
+
+%{__make} install \
+	DESTDIR=$RPM_BUILD_ROOT
 
 %clean
-[ -n "$RPM_BUILD_ROOT" -a "$RPM_BUILD_ROOT" != "/" ] && rm -rf $RPM_BUILD_ROOT
+rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%doc
-%{_libdir}/libpython_taglib.so
+%attr(755,root,root) %{_libdir}/libpython_taglib.so
+# not needed?
 %{_libdir}/libpython_taglib.la
-%{python_sitedir}/_TagLib.so
-%{python_sitedir}/TagLib.*
+%attr(755,root,root) %{py_sitedir}/_TagLib.so
+# py[co]?
+%{py_sitedir}/TagLib.*
