@@ -6,7 +6,7 @@ Release:	1
 License:	GPL
 Group:		Development/Libraries
 Source0:	http://download.berlios.de/namingmuse/%{name}-%{version}.tar.gz
-# Source0-md5:	744882d6de33d13b9d80a238f3dc16ed
+# Source0-md5:	ede76df44e0a82a64a0855f99e0cb4df
 URL:		http://namingmuse.berlios.de/
 BuildRequires:	python-devel
 BuildRequires:	rpm-pythonprov
